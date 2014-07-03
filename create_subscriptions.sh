@@ -53,7 +53,8 @@ curl -XPUT 'http://minerva-1003:9200/subscriptions/' -d '{
                 "meta": {
                     "properties": {
                         "id": {
-                            "type": "string"
+                            "type": "string",
+									 "analyzer":"whitespace"
                         }
                     }
                 }
