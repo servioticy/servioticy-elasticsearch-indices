@@ -1,7 +1,8 @@
 curl -XDELETE 'http://minerva-1003:9200/subscriptions/'
 curl -XPUT 'http://minerva-1003:9200/subscriptions/' -d '{
-    "mappings": {
+   "mappings": {
         "couchbaseCheckpoint": {
+            "dynamic": "true",
             "_source": {
                 "includes": [
                     "doc.*"
@@ -20,12 +21,30 @@ curl -XPUT 'http://minerva-1003:9200/subscriptions/' -d '{
                 }
             ]
         },
-        "_default_": {
+        "couchbaseDocument": {
+            "_all": {
+                "enabled": false
+            },
+            "dynamic": "true",
             "_source": {
                 "includes": [
                     "meta.*"
                 ]
             },
+            "dynamic_templates": [
+                {
+                    "all_strings_to_avoid_collisions": {
+                        "match": "*",
+                        "mapping": {
+                            "store": "no",
+                            "index": "not_analyzed",
+                            "include_in_all": false,
+                            "type": "string",
+                            "analyzer": "whitespace"
+                        }
+                    }
+                }
+            ],
             "properties": {
                 "doc": {
                     "properties": {
@@ -42,11 +61,7 @@ curl -XPUT 'http://minerva-1003:9200/subscriptions/' -d '{
                             "type": "string"
                         },
                         "customFields": {
-                            "properties": {
-                                "groupId": {
-                                    "type": "string"
-                                }
-                            }
+                            "enabled": false
                         }
                     }
                 },
@@ -54,7 +69,7 @@ curl -XPUT 'http://minerva-1003:9200/subscriptions/' -d '{
                     "properties": {
                         "id": {
                             "type": "string",
-									 "analyzer":"whitespace"
+                            "analyzer": "whitespace"
                         }
                     }
                 }
