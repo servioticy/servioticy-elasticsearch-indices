@@ -1,3 +1,4 @@
+curl -XDELETE 'http://localhost:9200/soupdates/'
 curl -XPUT 'http://localhost:9200/soupdates/' -d '{
     "mappings": {
         "couchbaseCheckpoint": {
