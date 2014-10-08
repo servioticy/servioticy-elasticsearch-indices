@@ -1,5 +1,5 @@
-curl -XDELETE 'http://minerva-1003:9200/subscriptions/'
-curl -XPUT 'http://minerva-1003:9200/subscriptions/' -d '{
+curl -XDELETE 'http://localhost:9200/subscriptions/'
+curl -XPUT 'http://localhost:9200/subscriptions/' -d '{
    "mappings": {
         "couchbaseCheckpoint": {
             "dynamic": "true",
