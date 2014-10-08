@@ -1,4 +1,4 @@
-curl -XPUT 'http://minerva-1003:9200/soupdates/' -d '{
+curl -XPUT 'http://localhost:9200/soupdates/' -d '{
     "mappings": {
         "couchbaseCheckpoint": {
             "dynamic": "true",
